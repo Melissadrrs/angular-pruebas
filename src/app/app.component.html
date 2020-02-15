@@ -1,10 +1,45 @@
 <div class="container">
-  <div class="row justify-content-center mt-4">
+  <div class="row justify-content-center">
      <form  class="col-6" [formGroup]="grupo">
         <div class="form-group">
            <input type="text" name="nombre" class="form-control"  formControlName="nombre" placeholder="Nombre">
            <span class="error" *ngIf="grupo.get('nombre').hasError('required') && grupo.get('nombre').touched">El nombre es requerido</span>
         </div>
+        <div class="form-group">
+              <input type="text" name="apellido"  class="form-control"  formControlName="apellido"
+              placeholder="Apellido">
+           <span class="error" *ngIf="grupo.get('apellido').hasError('required') && grupo.get('apellido').touched">El apellido es requerido</span>
+        </div>
+        <div class="form-group">
+              <input type="text" name="correo"  class="form-control"  formControlName="correo"
+              placeholder="Correo" 
+              (change)="CallChange($event)"
+              >
+           <span class="error" *ngIf="grupo.get('correo').hasError('required') && grupo.get('correo').touched">El correo es requerido</span>
+          <span class="error" *ngIf="grupo.get('correo').hasError('pattern') && grupo.get('correo').touched">El correo es inválido</span>
+        </div>
+
+        <div>
+          <div class="radio-inline" >
+ <!--              <label *ngFor="let sexo of ArraySexo; let indice=index"  >
+                <input type="radio" name="sexo" [value]="indice" formControlName="sexo" >
+                {{sexo}}
+              </label> -->
+              <ng-template ngFor [ngForOf]="ArraySexo" let-sexo let-i="indice" >
+              <label >
+                <input type="radio" name="sexo" [value]="indice" formControlName="sexo" >
+                {{sexo}}
+              </label>
+              </ng-template>
+          </div>
+        </div>
      </form>
+    <div class="col-4">
+      <h4>Resultados</h4>
+      <p>{{grupo.status}}</p>
+      <label>
+        {{grupo.value | json}}
+      </label>
+    </div>
   </div>
 </div>
