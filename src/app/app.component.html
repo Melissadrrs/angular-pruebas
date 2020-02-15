@@ -1,4 +1,10 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<div class="container">
+  <div class="row justify-content-center mt-4">
+     <form  class="col-6" [formGroup]="grupo">
+        <div class="form-group">
+           <input type="text" name="nombre" class="form-control"  formControlName="nombre" placeholder="Nombre">
+           <span class="error" *ngIf="grupo.get('nombre').hasError('required') && grupo.get('nombre').touched">El nombre es requerido</span>
+        </div>
+     </form>
+  </div>
+</div>
