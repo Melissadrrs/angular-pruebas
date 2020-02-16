@@ -18,6 +18,14 @@ ArraySexo: Array<string> =['Mujer','Hombre'];
     'hotmail.com',
     'yahoo.com',
   ];
+  intereses = [
+    'Tecnología',
+    'Lectura',
+    'Filantropía',
+    'Voluntariado',
+    'Música',
+  ];
+
  validatorsUtil: ValidatorsUtil = new ValidatorsUtil();
 
   constructor(private fb:FormBuilder){}
@@ -27,7 +35,8 @@ ArraySexo: Array<string> =['Mujer','Hombre'];
         nombre:[null,Validators.required],
         apellido:[null,Validators.required],
         correo:[null,[Validators.required,Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/),this.validatorsUtil.validadorCorreos(this.dominiosCorreosGratuitos)]],
-        sexo:[null,Validators.required]
+        sexo:[null,Validators.required],
+        intereses:[this.intereses.map(x=> this.fb.control(null))]
         })
 
   }

@@ -34,6 +34,13 @@
               </label>
               </ng-template>
           </div>
+          <div formArrayName="intereses">
+				<div *ngFor="let control of grupo.get('intereses').controls; let indice = index">
+					<label>
+						<input type="checkbox" [formControlName]="indice" [name]="indice">{{intereses[indice]}}
+					</label>
+				</div>
+          </div>
         </div>
      </form>
     <div class="col-4">
