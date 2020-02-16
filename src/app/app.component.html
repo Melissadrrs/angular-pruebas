@@ -17,6 +17,8 @@
               >
            <span class="error" *ngIf="grupo.get('correo').hasError('required') && grupo.get('correo').touched">El correo es requerido</span>
           <span class="error" *ngIf="grupo.get('correo').hasError('pattern') && grupo.get('correo').touched">El correo es inválido</span>
+
+            <span class="error" *ngIf="grupo.get('correo').hasError('correoGratuito') && grupo.get('correo').touched">No se admite correo gratuito</span>
         </div>
 
         <div>
