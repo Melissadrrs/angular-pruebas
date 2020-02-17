@@ -26,4 +26,37 @@ if(aux.length<2) return null;
   
   }
 
+  validadorMinimoChecks(
+    formArrayName: string,
+    minimoChecks: number
+  ): ValidatorFn {
+    return (ctrl: AbstractControl) => {
+      if (!ctrl || !ctrl.parent) {
+        return null;
+      }
+
+      const fa = ctrl.parent.get(formArrayName) as FormArray;
+
+      if (!fa || !fa.controls) {
+        return null;
+      }
+
+      let checksSeleccionados = 0;
+
+      for (const control of fa.controls) {
+        if (control.value) {
+          checksSeleccionados++;
+        }
+      }
+
+      if (checksSeleccionados < minimoChecks) {
+        return { minimoChecks: true };
+      }
+
+      return null;
+    };
+  }
+
+  
+
 }

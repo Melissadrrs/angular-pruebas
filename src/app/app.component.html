@@ -20,14 +20,12 @@
 
             <span class="error" *ngIf="grupo.get('correo').hasError('correoGratuito') && grupo.get('correo').touched">No se admite correo gratuito</span>
         </div>
-
-        <div>
           <div class="radio-inline" >
- <!--              <label *ngFor="let sexo of ArraySexo; let indice=index"  >
+<!--               <label *ngFor="let sexo of ArraySexo; let indice=index"  >
                 <input type="radio" name="sexo" [value]="indice" formControlName="sexo" >
                 {{sexo}}
               </label> -->
-              <ng-template ngFor [ngForOf]="ArraySexo" let-sexo let-i="indice" >
+              <ng-template ngFor [ngForOf]="ArraySexo" let-sexo let-indice="index" >
               <label >
                 <input type="radio" name="sexo" [value]="indice" formControlName="sexo" >
                 {{sexo}}
@@ -35,13 +33,26 @@
               </ng-template>
           </div>
           <div formArrayName="intereses">
-				<div *ngFor="let control of grupo.get('intereses').controls; let indice = index">
+				<div *ngFor="let control of grupo.get('intereses').controls;   index as indice;" >
 					<label>
-						<input type="checkbox" [formControlName]="indice" [name]="indice">{{intereses[indice]}}
-					</label>
+						<input type="checkbox" [formControlName]="indice" [name]="indice" >{{intereses[indice]}}
+					</label> 
 				</div>
+        	<span class="error" *ngIf="grupo.get('intereses').touched && grupo.get('intereses').invalid">Debe
+					seleccionar 3 checks al menos</span>
           </div>
-        </div>
+<br/>
+
+
+          <div formArrayName="direcciones">
+            <p>Direcciones</p>
+            <button class="btn btn-warning" (click)="addDireccion()">Agregar</button>
+            <div class="form-group row" *ngFor="let control of grupo.get('direcciones').controls; index as indice">
+              <input type="text" class="form-control" [formControlName]="indice" [name]="indice">
+              <button class="btn btn-danger col-7" (click)="removeDireccion(indice)">Eliminar</button>
+            </div>
+          </div>
+
      </form>
     <div class="col-4">
       <h4>Resultados</h4>

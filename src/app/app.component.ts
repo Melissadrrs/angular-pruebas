@@ -34,14 +34,30 @@ ArraySexo: Array<string> =['Mujer','Hombre'];
       this.grupo=this.fb.group({
         nombre:[null,Validators.required],
         apellido:[null,Validators.required],
+                sexo:[null,Validators.required],
         correo:[null,[Validators.required,Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/),this.validatorsUtil.validadorCorreos(this.dominiosCorreosGratuitos)]],
-        sexo:[null,Validators.required],
-        intereses:[this.intereses.map(x=> this.fb.control(null))]
+
+        intereses: this.fb.array(this.intereses.map(x=> this.fb.control(null)),this.validatorsUtil.validadorMinimoChecks("intereses",3)),
+        direcciones: this.fb.array([])
         })
 
   }
 
   CallChange(event:any){
     console.log(event.target)
+  }
+
+  addDireccion(){
+    const fa:FormArray=this.grupo.get('direcciones') as FormArray;
+
+    fa.push(this.fb.control(null));
+
+  }
+
+    removeDireccion(indice:any){
+    const fa:FormArray=this.grupo.get('direcciones') as FormArray;
+
+    fa.removeAt(indice);
+
   }
 }
