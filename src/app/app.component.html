@@ -50,6 +50,9 @@
             <div class="form-group row" *ngFor="let control of grupo.get('direcciones').controls; index as indice">
               <input type="text" class="form-control" [formControlName]="indice" [name]="indice">
               <button class="btn btn-danger col-7" (click)="removeDireccion(indice)">Eliminar</button>
+              <span class="error" *ngIf="control.touched && control.invalid">
+                El campo es obligatorio
+              </span>
             </div>
           </div>
 

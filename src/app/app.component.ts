@@ -50,7 +50,7 @@ ArraySexo: Array<string> =['Mujer','Hombre'];
   addDireccion(){
     const fa:FormArray=this.grupo.get('direcciones') as FormArray;
 
-    fa.push(this.fb.control(null));
+    fa.push(this.fb.control(null,Validators.required));
 
   }
 
